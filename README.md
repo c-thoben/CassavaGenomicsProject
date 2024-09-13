@@ -2,7 +2,7 @@
 Collection of scripts used in the Cassava Genomics Project
 
 | Script                         | Version | Source                                                   | Cite                                                     | Description                                                                          |
-|---------------------------------|---------|-----------------------------------------------------------|----------------------------------------------------------|--------------------------------------------------------------------------------------|
+|---|---|---|---|---|
 | clean_genomic_fasta.py          | 0.15    | https://github.com/bpucker/GenomeAssembly/                | https://doi.org/10.1101/2023.06.27.546741                | Clean contig identifiers to avoid incompatibility issues                             |
 | contig_stats.py                 | 1.31    | https://github.com/bpucker/script_collection/             | http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0164321 | Calculate contig statistics                                                          |
 | genetic_map_to_fasta.py         | 0.2     | -                                                         | TODO                                                     | Create input file for ALLMAPS merge command by mapping genetic markers to assembly contigs |
