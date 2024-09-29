@@ -7,8 +7,8 @@ __version__ = "v0.2"
 __usage__ = """
 python genetic_map_to_fasta.py \
 --map <FULL_PATH_TO_GENETIC_MAP_FILE> \
---contigs <FULL_PATH_TO_CONTIGS_FILE>
---output <BASE_PATH_TO_OUTPUT_FILE> \
+--contigs <FULL_PATH_TO_CONTIGS_FILE> \
+--output <BASE_PATH_TO_OUTPUT_FILE>
 [--sim <MINIMUM_SIMILARITY_BEST_HIT]
 [--score <MINIMUM_SCORE_BEST_HIT]
                     
@@ -149,5 +149,7 @@ def main():
     parse_blastn_output(out, out_map, min_sim, min_score)
 
 
-if __name__ == '__main__':
-	main()	
+if '--map' in sys.argv and '--contigs' in sys.argv and '--output' in sys.argv:
+	main( sys.argv )
+else:
+	sys.exit( __usage__ )
