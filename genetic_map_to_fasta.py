@@ -1,34 +1,33 @@
 ### Cassava Genomics Project at PuckerLab ###
-### PuckerLab website
+### https://www.tu-braunschweig.de/en/ifp/pbb
 ### Cassava Genomics Projekt repository: https://github.com/c-thoben/CassavaGenomicsProject ###
 
 __version__ = "v0.2"
 
 __usage__ = """
-                python genetic_map_to_fasta.py \
-                    --map <FULL_PATH_TO_GENETIC_MAP_FILE> \
-                    --contigs <FULL_PATH_TO_CONTIGS_FILE>
-                    --output <BASE_PATH_TO_OUTPUT_FILE> \
-                    [--sim <MINIMUM_SIMILARITY_BEST_HIT]
-                    [--score <MINIMUM_SCORE_BEST_HIT]
+python genetic_map_to_fasta.py \
+--map <FULL_PATH_TO_GENETIC_MAP_FILE> \
+--contigs <FULL_PATH_TO_CONTIGS_FILE>
+--output <BASE_PATH_TO_OUTPUT_FILE> \
+[--sim <MINIMUM_SIMILARITY_BEST_HIT]
+[--score <MINIMUM_SCORE_BEST_HIT]
                     
-                Input:
-                --map: genetic markers
-                --fasta: FASTA file containing assembly contigs
-                --output: Base path to output files (without extension)
+Input:
+--map: genetic markers
+--fasta: FASTA file containing assembly contigs
+--output: Base path to output files (without extension)
 
-                Output:
-                <output>.fasta -> FASTA file containing marker sequences
-                <output>_blastn_marker_contig_mapping.txt -> BLASTN output
-                <output>_mapped_contigs.csv -> Mapped markers, compatible with ALLMAPS merge command
+Output:
+<output>.fasta -> FASTA file containing marker sequences
+<output>_blastn_marker_contig_mapping.txt -> BLASTN output
+<output>_mapped_contigs.csv -> Mapped markers, compatible with ALLMAPS merge command
 
-                Mapping of genetic markers (--map) to assembly contigs (--contigs). 
-                Genetic markers are expected in the format of the composite genetic map from Manihot
-                esculenta Crantz by the ICGMC (File S2, https://doi.org/10.1534/g3.114.015008).
-
-
-                Please cite the COL40 assembly publication when using the script: https://doi.org/10.3390/genes13071131
-                For questions, contact c.thoben@tu-braunschweig.de for help.
+Mapping of genetic markers (--map) to assembly contigs (--contigs). 
+Genetic markers are expected in the format of the composite genetic map from Manihot
+esculenta Crantz by the ICGMC (File S2, https://doi.org/10.1534/g3.114.015008).
+                
+Please cite the COL40 assembly publication when using the script: 
+For questions, contact c.thoben@tu-braunschweig.de for help.
             """
 
 import argparse
