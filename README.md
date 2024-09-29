@@ -18,7 +18,7 @@ Collection of scripts used in the Cassava Genomics Project
 python genetic_map_to_fasta.py \
 --map <FULL_PATH_TO_GENETIC_MAP_FILE> \
 --contigs <FULL_PATH_TO_CONTIGS_FILE>
---output <BASE_PATH_TO_OUTPUT_FILE> \
+--output <BASE_PATH_TO_OUTPUT_FILE>
 [--sim <MINIMUM_SIMILARITY_BEST_HIT]
 [--score <MINIMUM_SCORE_BEST_HIT]
 ```
@@ -40,7 +40,7 @@ python coverage_te_plot.py \
 --coverage_file <FULL_PATH_TO_COVERAGE_FILE> \
 --te_file <FULL_PATH_TO_TE_FILE> \
 --out <FULL_PATH_TO_OUTPUT_FILE> \
---cov <AVERAGE_COVERAGE> \
+--cov <AVERAGE_COVERAGE>
 [--res <RESOLUTION, WINDOW_SIZE_FOR_COVERAGE_CALCULATION> 1000]
 [--sat <SATURATION, CUTOFF_FOR_MAX_COVERAGE_VALUE> 100.0]
 [--num_contigs <NUMBER_OF_CONTIGS_TO_PLOT> 18]
