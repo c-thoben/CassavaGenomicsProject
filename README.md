@@ -1,4 +1,6 @@
 # Cassava Genomics project
+[![DOI](https://zenodo.org/badge/846598077.svg)](https://doi.org/10.5281/zenodo.13858428)
+
 Collection of scripts used in the Cassava Genomics Project
 
 | Script                                                                                                   | Version | Source                                              | Cite                                                |
