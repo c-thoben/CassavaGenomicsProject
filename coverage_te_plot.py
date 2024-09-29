@@ -8,33 +8,34 @@
 __version__ = "v0.5"
 
 __usage__ = """
-					python coverage_te_plot.py \
-					--coverage_file <FULL_PATH_TO_COVERAGE_FILE> \
-					--te_file <FULL_PATH_TO_TE_FILE> \
-     				--out <FULL_PATH_TO_OUTPUT_FILE> \
-         			--cov <AVERAGE_COVERAGE> \		
-					[--res <RESOLUTION, WINDOW_SIZE_FOR_COVERAGE_CALCULATION> 1000]
-					[--sat <SATURATION, CUTOFF_FOR_MAX_COVERAGE_VALUE> 100.0]
-					[--num_contigs <NUMBER_OF_CONTIGS_TO_PLOT> 18]
-					[--max_chromosome <MAXIMUM_CHROMOSOME_SIZE_BP 55000000]
-     
-					Input:
-					--coverage_file: Coverage file
-					--te_file: Repeats TSV created with Circos genomicDensity function
-					--cov: Average coverage
-					--out: Base path to output files (without extension)
-     
-					Output:
-					<out>.png -> Coverage plot
-					<out>_<contig>.png -> Histogram of coverage for each contig/chromosome
-					<out>_coverage_resolution<res>.tsv -> Average coverage per block
-     
-     				Creates a coverage plot showing the average coverage in blocks of resolution size (--res). The maximum displayed coverage is defined
-					by the saturation (--sat). Each chromosome is plotted separatly and the average coverage is marked by a red line. For each chromosome,
-					a histogram is created showing the coverage distribution.
-     
-					Script adapted from cov_plot.py script, please cite the At7 publication when using the script: https://doi.org/10.1371/journal.pone.0164321
-					For questions, contact b.pucker@tu-braunschweig.de for help
+python coverage_te_plot.py \
+--coverage_file <FULL_PATH_TO_COVERAGE_FILE> \
+--te_file <FULL_PATH_TO_TE_FILE> \
+--out <FULL_PATH_TO_OUTPUT_FILE> \
+--cov <AVERAGE_COVERAGE> \		
+[--res <RESOLUTION, WINDOW_SIZE_FOR_COVERAGE_CALCULATION> 1000]
+[--sat <SATURATION, CUTOFF_FOR_MAX_COVERAGE_VALUE> 100.0]
+[--num_contigs <NUMBER_OF_CONTIGS_TO_PLOT> 18]
+[--max_cov <MAXIMUM_COVERAGE 600]
+[--max_chromosome <MAXIMUM_CHROMOSOME_SIZE_BP 55000000]
+
+Input:
+--coverage_file: Coverage file
+--te_file: Repeats TSV created with Circos genomicDensity function
+--cov: Average coverage
+--out: Base path to output files (without extension)
+
+Output:
+<out>.png -> Coverage plot
+<out>_<contig>.png -> Histogram of coverage for each contig/chromosome
+<out>_coverage_resolution<res>.tsv -> Average coverage per block
+
+Creates a coverage plot showing the average coverage in blocks of resolution size (--res). The maximum displayed coverage is defined
+by the saturation (--sat). Each chromosome is plotted separatly and the average coverage is marked by a red line. For each chromosome,
+a histogram is created showing the coverage distribution.
+
+Script adapted from cov_plot.py script, please cite the At7 publication when using the script: https://doi.org/10.1371/journal.pone.0164321
+For questions, contact b.pucker@tu-braunschweig.de for help
 					"""
 
 import sys, os, re
@@ -142,14 +143,18 @@ def generate_hist( cov_values, outputfile, saturation ):
 	
 	values = []
 	for each in cov_values:
-		if each > saturation:
-			values.append( saturation )
-		else:
-			values.append( each )
+			if each > saturation:
+					values.append( saturation )
+			else:
+					values.append( each )
+		
+	fig, ax = plt.subplots()
 	
-	fig, ax = plt.subplots()	
-	ax.hist( values, bins=300 )
-	ax.set_xlim( 0, 200 )	
+	ax.hist( values, edgecolor='white', bins = 80 )
+	ax.set_xlim( 0, saturation )
+	ax.set_xlabel( "coverage" )
+	ax.set_ylabel( "count" )
+	
 	fig.savefig( outputfile, dpi=300 )
 
 
@@ -166,6 +171,7 @@ def main( arguments ):
 	saturation = float(arguments[ arguments.index( '--sat' ) + 1 ]) if '--sat' in arguments else 100.0
 	ymax = int(arguments[ arguments.index( '--num_contigs' ) + 1 ]) if '--num_contigs' in arguments else 18
 	chromosome_max = int(arguments[ arguments.index( '--max_chromosome' ) + 1 ]) if '--max_chromosome' in arguments else 55000000
+	max_value = 600 if not '--max_cov' in arguments else int( arguments[ arguments.index( '--max_cov' ) + 1 ] )
 	xticks = [0, 10, 20, 30, 40, 50, 55]
 
 	# --- adjust chromosome length to resolution --- #
@@ -181,8 +187,8 @@ def main( arguments ):
    	# --- get average coverage per block --- #
 	print("--- get average coverage per block ---")
 	out_file_list = "%s_coverage_resolution%s.tsv" % (out_file.split(".")[0], str(resolution))
+ 
 	if not os.path.isfile(out_file_list):
-     
 		# --- load contigs coverage file --- #
 		cov = load_cov( cov_file )
 
@@ -211,7 +217,7 @@ def main( arguments ):
 		for c in collected_values:
 			collected_values[c] = [i for i in collected_values[c] if not np.isnan(i)]
 		cov = collected_values
-    	
+  
 	# --- generate coverage plot --- #
 	print("--- generate coverage plot ---")
 	generate_plot( cov, out_file, saturation, coverage, resolution, collected_values, ymax, max_value, chromosome_max, xticks, rep )
