@@ -88,3 +88,8 @@ Analyzes EDTA annotation results by classifying repeats. A bar plot is generated
 - `<output_dir>/tables/density_repeats_B.tsv`: Density of repeats for haplophase B
 - `<output_dir>/plots/circos_genomic_density_A.png`: Circos plot for haplophase A
 - `<output_dir>/plots/circos_genomic_density_B.png`: Circos plot for haplophase B
+
+## Reference
+Thoben C, Pucker B, Winter S, Econopouly BF, Sheat S. The haplotype-resolved assembly of COL40 a cassava (Manihot esculenta) line with broad-spectrum resistance against viruses causing Cassava brown streak disease unveils a region of highly repeated elements on chromosome 12. G3 (Bethesda). 2025 Jun 4;15(6):jkaf083. doi: [10.1093/g3journal/jkaf083](https://doi.org/10.1093/g3journal/jkaf083)
+
+
